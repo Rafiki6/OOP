@@ -1,0 +1,26 @@
+<body>
+    <div id="introDiv"></div>
+</body>
+<script>
+    class Employee {
+    constructor(id, firstName, lastName, jobTitle, payRate) {
+    this.employeeId = id;
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.jobTitle = jobTitle;
+    this.payRate = payRate;
+    }
+    // METHODS 
+    getIntro(){
+        let intro = "Hi! I'm " + this.firstName + " " + this.lastName +
+                    " and I am a " + this.jobTitle;
+                    return intro;
+    }
+}
+let employee = new Employee("1", "Ezra", "Aiden","Theater Teacher", 38.46);
+// GET THE MESSAGE AND DISPLAY ON THE PAGE
+let introMessage = employee.getIntro();
+
+let introDiv = document.getElementById("introDiv");
+introDiv.innerHTML = introMessage
+</script>
