@@ -12,6 +12,7 @@
     <title>Store</title>
     <link rel="stylesheet" href="./css/store.css">
     <script src="./script/store.js"></script>
+   
 </head>
 
 <body>
@@ -61,9 +62,9 @@
 
     function deleteItem(buttonElement) {
         const tr = buttonElement.closest("tr");
-        const index = tr.dataset.id;
+        const index = Number(tr.dataset.id);
         const item = store.cart.itemList[index];
-        store.cart.itemList.slice(index, 1);//REMOVE FROM IT
+        store.cart.itemList.splice(index, 1);//REMOVE FROM IT
 
         // UPDATE INDEXES AFTER THE REMOVE ITEM
         let reached = false;
@@ -80,10 +81,11 @@
             }
         }
         tr.remove(); //REMOVE FROM LIST
-        cartTotal.innerHTML = store.getTotal().tofixed(2);//UPDATE TOTAL
+        cartTotal.innerHTML = store.getTotal().toFixed(2);//UPDATE TOTAL
+        // cartTotal.innerHTML = store.getTotal().toFixed(2);
     }
     function qtyChange(inputElement) {
-        const tr = inputElement.closest();
+        const tr = inputElement.closest("tr");
         const index = tr.dataset.id;
         const item = store.cart.itemList[index];
 
@@ -91,8 +93,8 @@
         item.quantity = Number(inputElement.value);
 
         // 2. UPDATE UI DISPLAY BASED ON CHANGES IN THE DATA
-        tr.querySelector(".ext").innerHTML = item.getExtendedPrice().tofixed(2);
-        cartTotal.innerHTML = store.getTotal().tofixed(2);
+        tr.querySelector(".ext").innerHTML = item.getExtendedPrice().toFixed(2);
+        cartTotal.innerHTML = store.getTotal().toFixed(2);
 
     }
     function addToCart(buttonElement) {
@@ -100,15 +102,15 @@
         const product = store.productList[index];
         itemIndex = store.add(index,1);
 
-        cartTotal.innerHTML = store.getTotal().tofixed(2);
+        cartTotal.innerHTML = store.getTotal().toFixed(2);
 
         const copy = templateLineItem.cloneNode(true);
         copy.dataset.id = itemIndex;
         copy.classList.remove("template");
         copy.querySelector(".desc").innerHTML = product.name;
         copy.querySelector(".qty").value = 1;
-        copy.querySelector(".price").innerHTML = product.price.tofixed(2);
-        copy.querySelector(".ext").innerHTML = product.price.tofixed(2);
+        copy.querySelector(".price").innerHTML = product.price.toFixed(2);
+        copy.querySelector(".ext").innerHTML = product.price.toFixed(2);
         lineItemList.appendChild(copy);
     }
     function showProduct(product, index){

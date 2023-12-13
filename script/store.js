@@ -3,11 +3,11 @@ class Store {
     // CURRENT 
     constructor(productList) {
         this.productList = productList;
-        this.cart = cart;
+        this.cart = new Order();
     }
     show() {
         this.productList.forEach((p, i) => {
-            console.log(i, p.show());
+            console.log(i, p.show())
         });
     }
     add(i, quantity = 1) {
@@ -36,7 +36,7 @@ class Customer{
 class lineItem{
     constructor(product, quantity){
         this.product = product;
-        this,quantity = quantity;
+        this.quantity = quantity;
 
     }
     getExtendedPrice(){
@@ -47,3 +47,32 @@ function sum(numberList){
     return numberList.reduce((acc, cv) => acc + cv,0);
 
 }
+class Order{
+    constructor(){
+        this.Customer = new Customer();
+        this.itemList = []
+    }
+    show(){
+        this.itemList.forEach(item =>{
+            let ext = item.getExtendedPrice();
+            console.log(item.quantity,item.product.show(),ext)
+        });
+        console.log(`TOTAL: ${this.getTotal()}`)
+    }
+    getTotal(){
+        const extenedPrice = this.itemList.map(item => item.getExtendedPrice());
+        return sum(extenedPrice)
+    }
+}
+// TEST
+const store = new Store([
+    new Product("paper",5.00,"./images/paper.jpg"),
+    new Product("pencil",1.00,"./images/pencil.jpg"),
+    new Product("paperclip",0.50,"./images/paperclip.jpg")
+]);
+// store.show()
+
+// // store.add(0, 2)
+// // store.add(1, 12)
+
+// store.cart.show();

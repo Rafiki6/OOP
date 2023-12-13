@@ -84,4 +84,4 @@ class Student{
 let student = new Student("1", "Ezra", "Aiden","Theater Teacher", 38.46);
 student.getIntro();
 
-
+// SCI
