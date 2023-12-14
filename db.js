@@ -3,10 +3,12 @@ var mysql = require('mysql');
 var con = mysql.createConnection({
     host: "localhost",
     user: "root",
-    password: "password"
+    password: "kigali",
+    database : "usedata"
 });
 let sql = `
-SELECT * FROM SAKILA.ACTOR;
+SELECT * 
+FROM datastore;
 `;
 con.connect(function (err) {
     if (err) throw err;
@@ -14,6 +16,6 @@ con.connect(function (err) {
 
     con.query(sql, function (err, result) {
         if (err) throw err;
-        console.log("Result: " + result[0].first_name);
+        console.log("Result: " + result[0].id);
       });
 });
