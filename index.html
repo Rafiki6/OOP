@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input id="newUser" placeholder="enter new user name">
+    <button id="add">ADD</button>
+    <select id="userList">
+        <option value="">--Select a User--</option>
+    </select>
+    <input type="color" id="colorInput">
+</body>
+<script>
+    // const host = "http://35.165.18.146:3100"
+    const host = "http://localhost:3100"
+    add.addEventListener("click", e => {
+        fetch(host + "/api/user", {
+            method: "POST",
+            headers: { "content-type": "application/json" },
+            body: JSON.stringify({ username: newUser.value })
+        }).then(res => window.location.reload())
+
+    });
+    function loadUser() {
+        fetch(host + "/api/userdata")
+            .then(response => response.json())
+            .then(data => 
+                data.forEach(item => userList.innerHTML += `
+            <option value="${item.jsontext}">${item.USERNAME}</option>`
+                
+            )
+        )
+    }
+    loadUser();
+    userList.addEventListener("change", e =>{
+        let jsontext = decodeURIComponent(userList.value)
+        let data = JSON.parse(jsontext);
+        console.log(data);
+        colorInput.value = data.color;
+    })
+
+    colorInput.addEventListener("change", e =>{
+        fetch(host + "/api/userdata",{
+            method: "POST",
+            headers:{"content-type":"application/json"},
+            body: JSON.stringify({
+                username: userList.selectedOptions[0].innerHTML,
+                color : colorInput.value
+            })
+        }).then(res => window.location.reload())
+    })
+
+</script>
+
+</html>

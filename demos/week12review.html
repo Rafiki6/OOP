@@ -1,0 +1,28 @@
+<body>
+    <div id="target"></div>
+    <label><input type="radio" name="station" value="107">107</label>
+    <label><input type="radio" name="station" value="106.7">106.7</label>
+    <label><input type="radio" name="station" value="107.1">107.1</label>
+    
+</body>
+<script>
+    
+//CREATE AND APPEND CONTENT WITH JS OBJECTS(not text/innerHTML)
+//OUR PAGE HAS THIS HTML:<div id="target"></div>
+//ADD A LINK TO THE DIV WITH THE ID TARGET?
+const a  = document.createElement("a");
+a.href = "htpp://disney.com"
+textNode = document.createTextNode("GO PLAY");
+a.appendChild(textNode);
+div = document.getElementById("target")
+div.appendChild(a)
+
+//GET ALL 
+all_radio_with_name = document.querySelectorAll("input[name=station]")
+console.log("the Lenght "+ all_radio_with_name.length)
+
+//WHAT IS THE DIFFERENT BTWN THESE 3 SELECTORS?
+a = document.querySelectorAll("cool")// All TAGS
+b = document.querySelectorAll(".cool")//All class
+c = document.querySelectorAll("#cool")//All ID
+</script>
